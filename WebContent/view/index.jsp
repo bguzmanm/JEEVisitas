@@ -12,6 +12,13 @@
 <body>
 	<div class="container">
 		<h1>Listado de Visitas</h1>
+		<%
+			HttpSession sesion = request.getSession();
+		
+			out.println("<h3>Bienvenido " + sesion.getAttribute("usr") + "</h3>");
+			
+		%>
+		
 		
 		<table class="table">
 			<thead class="table-dark">
@@ -26,7 +33,7 @@
 			<tbody>
 				<c:forEach var="v" items="${visitas}">
 					<tr>
-						<td><c:out value="${v.getId()}"></c:out></td>
+						<td><a href="ControllerDetalle"><c:out value="${v.getId()}"></c:out></a></td>
 						<td><c:out value="${v.getRut()}"></c:out></td>
 						<td><c:out value="${v.getFecha()}"></c:out></td>
 						<td><c:out value="${v.getNombre()}"></c:out></td>

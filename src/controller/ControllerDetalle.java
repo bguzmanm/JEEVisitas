@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -11,20 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AdminVisita;
-import model.Visita;
-
 /**
- * Servlet implementation class ControllerVisita
+ * Servlet implementation class ControllerDetalle
  */
-@WebServlet("/ControllerVisita")
-public class ControllerVisita extends HttpServlet {
+@WebServlet("/ControllerDetalle")
+public class ControllerDetalle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerVisita() {
+    public ControllerDetalle() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +28,17 @@ public class ControllerVisita extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 		
-		AdminVisita listaVisitas = new AdminVisita();
+		//lectura de la cookie.
+		Cookie nombre = request.getCookies()[1];
+		System.out.println(nombre.getName() + ": " + nombre.getValue());
 		
-		request.setAttribute("visitas", listaVisitas.getAllVisitas());
-		
-		//Manejo de cookies.
-		Cookie cookieNombre = new Cookie("cookieNombre", "Deyanira");
-		cookieNombre.setDomain(request.getLocalName());
-		//ojo que solo vive 5 segundos.
-		cookieNombre.setMaxAge(5); 
-
-		response.addCookie(cookieNombre);
-		
-		//manejo de sesiones.
+		//lectura de session
 		HttpSession sesion = request.getSession();
-		sesion.setAttribute("apellido", "Silva");
+		System.out.println(sesion.getAttribute("apellido"));
 		
-		
-		getServletContext().getRequestDispatcher("/view/index.jsp").forward(request, response);
-		
+		getServletContext().getRequestDispatcher("/view/detalle.jsp").forward(request, response);
 	}
 
 	/**
